@@ -109,8 +109,8 @@ public:
 	uint32_t nType; // 0x28
 	uint32_t nRegistered; // 0x2C
 	uint32_t nFlags; // 0x30
-	PAD( 0x1C ); // 0x34
-	CVValue_t value; // 0x50
+	PAD( 0x24 ); // 0x34
+	CVValue_t value; // 0x58
 };
 
 namespace IEngineCVar_Search
