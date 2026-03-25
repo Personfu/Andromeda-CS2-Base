@@ -7,14 +7,13 @@
 #define CONFIG_FILE					"config.json"
 
 #define CHEAT_NAME					"Andromeda CS2 Base"
-#define CHEAT_VERSION				"1.1.0"
+#define CHEAT_VERSION				"1.1.1"
 
 // Project Buid Config:
 
 #ifdef RELEASE_BUILD
 
 #define ENABLE_CONSOLE_DEBUG		1
-#define ENABLE_MANUAL_MAP			1
 #define ENABLE_CPP_EH_EXCEPTION		0
 
 #define LOG_SDK						1
@@ -24,6 +23,6 @@
 #define ENABLE_XOR_VMP_STR			0
 
 #define DUMP_SCHEMA_SCOPE_LIST		0
-#define DUMP_SCHEMA_ALL_OFFSET		0
+#define DUMP_SCHEMA_ALL_OFFSET		1
 
 #endif // RELEASE_BUILD
