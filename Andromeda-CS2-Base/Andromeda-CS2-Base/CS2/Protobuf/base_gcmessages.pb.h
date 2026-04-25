@@ -16396,6 +16396,7 @@ class CMsgOpenCrate final :
     kSubjectItemIdFieldNumber = 2,
     kForRentalFieldNumber = 3,
     kPointsRemainingFieldNumber = 4,
+    kVolatileLimitFieldNumber = 5,
   };
   // optional uint64 tool_item_id = 1;
   bool has_tool_item_id() const;
@@ -16449,6 +16450,19 @@ class CMsgOpenCrate final :
   void _internal_set_points_remaining(uint32_t value);
   public:
 
+  // optional uint32 volatile_limit = 5;
+  bool has_volatile_limit() const;
+  private:
+  bool _internal_has_volatile_limit() const;
+  public:
+  void clear_volatile_limit();
+  uint32_t volatile_limit() const;
+  void set_volatile_limit(uint32_t value);
+  private:
+  uint32_t _internal_volatile_limit() const;
+  void _internal_set_volatile_limit(uint32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:CMsgOpenCrate)
  private:
   class _Internal;
@@ -16463,6 +16477,7 @@ class CMsgOpenCrate final :
     uint64_t subject_item_id_;
     bool for_rental_;
     uint32_t points_remaining_;
+    uint32_t volatile_limit_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_base_5fgcmessages_2eproto;
@@ -26813,6 +26828,34 @@ inline void CMsgOpenCrate::_internal_set_points_remaining(uint32_t value) {
 inline void CMsgOpenCrate::set_points_remaining(uint32_t value) {
   _internal_set_points_remaining(value);
   // @@protoc_insertion_point(field_set:CMsgOpenCrate.points_remaining)
+}
+
+// optional uint32 volatile_limit = 5;
+inline bool CMsgOpenCrate::_internal_has_volatile_limit() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool CMsgOpenCrate::has_volatile_limit() const {
+  return _internal_has_volatile_limit();
+}
+inline void CMsgOpenCrate::clear_volatile_limit() {
+  _impl_.volatile_limit_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
+inline uint32_t CMsgOpenCrate::_internal_volatile_limit() const {
+  return _impl_.volatile_limit_;
+}
+inline uint32_t CMsgOpenCrate::volatile_limit() const {
+  // @@protoc_insertion_point(field_get:CMsgOpenCrate.volatile_limit)
+  return _internal_volatile_limit();
+}
+inline void CMsgOpenCrate::_internal_set_volatile_limit(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000010u;
+  _impl_.volatile_limit_ = value;
+}
+inline void CMsgOpenCrate::set_volatile_limit(uint32_t value) {
+  _internal_set_volatile_limit(value);
+  // @@protoc_insertion_point(field_set:CMsgOpenCrate.volatile_limit)
 }
 
 // -------------------------------------------------------------------

@@ -190,9 +190,6 @@ extern CMsgGCCStrike15_v2_ClientReportResponseDefaultTypeInternal _CMsgGCCStrike
 class CMsgGCCStrike15_v2_ClientReportServer;
 struct CMsgGCCStrike15_v2_ClientReportServerDefaultTypeInternal;
 extern CMsgGCCStrike15_v2_ClientReportServerDefaultTypeInternal _CMsgGCCStrike15_v2_ClientReportServer_default_instance_;
-class CMsgGCCStrike15_v2_ClientReportValidation;
-struct CMsgGCCStrike15_v2_ClientReportValidationDefaultTypeInternal;
-extern CMsgGCCStrike15_v2_ClientReportValidationDefaultTypeInternal _CMsgGCCStrike15_v2_ClientReportValidation_default_instance_;
 class CMsgGCCStrike15_v2_ClientRequestJoinFriendData;
 struct CMsgGCCStrike15_v2_ClientRequestJoinFriendDataDefaultTypeInternal;
 extern CMsgGCCStrike15_v2_ClientRequestJoinFriendDataDefaultTypeInternal _CMsgGCCStrike15_v2_ClientRequestJoinFriendData_default_instance_;
@@ -637,7 +634,6 @@ template<> ::CMsgGCCStrike15_v2_ClientPollState* Arena::CreateMaybeMessage<::CMs
 template<> ::CMsgGCCStrike15_v2_ClientReportPlayer* Arena::CreateMaybeMessage<::CMsgGCCStrike15_v2_ClientReportPlayer>(Arena*);
 template<> ::CMsgGCCStrike15_v2_ClientReportResponse* Arena::CreateMaybeMessage<::CMsgGCCStrike15_v2_ClientReportResponse>(Arena*);
 template<> ::CMsgGCCStrike15_v2_ClientReportServer* Arena::CreateMaybeMessage<::CMsgGCCStrike15_v2_ClientReportServer>(Arena*);
-template<> ::CMsgGCCStrike15_v2_ClientReportValidation* Arena::CreateMaybeMessage<::CMsgGCCStrike15_v2_ClientReportValidation>(Arena*);
 template<> ::CMsgGCCStrike15_v2_ClientRequestJoinFriendData* Arena::CreateMaybeMessage<::CMsgGCCStrike15_v2_ClientRequestJoinFriendData>(Arena*);
 template<> ::CMsgGCCStrike15_v2_ClientRequestJoinServerData* Arena::CreateMaybeMessage<::CMsgGCCStrike15_v2_ClientRequestJoinServerData>(Arena*);
 template<> ::CMsgGCCStrike15_v2_ClientRequestOffers* Arena::CreateMaybeMessage<::CMsgGCCStrike15_v2_ClientRequestOffers>(Arena*);
@@ -860,7 +856,6 @@ enum ECsgoGCMsg : int {
   k_EMsgGCCStrike15_v2_ClientPerfReport = 9202,
   k_EMsgGCCStrike15_v2_GetEventFavorites_Response = 9203,
   k_EMsgGCCStrike15_v2_ClientRequestSouvenir = 9204,
-  k_EMsgGCCStrike15_v2_ClientReportValidation = 9205,
   k_EMsgGCCStrike15_v2_GC2ClientRefuseSecureMode = 9206,
   k_EMsgGCCStrike15_v2_GC2ClientRequestValidation = 9207,
   k_EMsgGCCStrike15_v2_ClientRedeemMissionReward = 9209,
@@ -17049,6 +17044,7 @@ class CMsgGCCStrike15_v2_ClientRequestJoinFriendData final :
     kAccountIdFieldNumber = 2,
     kJoinTokenFieldNumber = 3,
     kJoinIppFieldNumber = 4,
+    kIsLocalServerFieldNumber = 7,
   };
   // optional string errormsg = 6;
   bool has_errormsg() const;
@@ -17138,6 +17134,19 @@ class CMsgGCCStrike15_v2_ClientRequestJoinFriendData final :
   void _internal_set_join_ipp(uint32_t value);
   public:
 
+  // optional bool is_local_server = 7;
+  bool has_is_local_server() const;
+  private:
+  bool _internal_has_is_local_server() const;
+  public:
+  void clear_is_local_server();
+  bool is_local_server() const;
+  void set_is_local_server(bool value);
+  private:
+  bool _internal_is_local_server() const;
+  void _internal_set_is_local_server(bool value);
+  public:
+
   // @@protoc_insertion_point(class_scope:CMsgGCCStrike15_v2_ClientRequestJoinFriendData)
  private:
   class _Internal;
@@ -17154,6 +17163,7 @@ class CMsgGCCStrike15_v2_ClientRequestJoinFriendData final :
     uint32_t account_id_;
     uint32_t join_token_;
     uint32_t join_ipp_;
+    bool is_local_server_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_cstrike15_5fgcmessages_2eproto;
@@ -39561,471 +39571,6 @@ class CVDiagnostic final :
 };
 // -------------------------------------------------------------------
 
-class CMsgGCCStrike15_v2_ClientReportValidation final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgGCCStrike15_v2_ClientReportValidation) */ {
- public:
-  inline CMsgGCCStrike15_v2_ClientReportValidation() : CMsgGCCStrike15_v2_ClientReportValidation(nullptr) {}
-  ~CMsgGCCStrike15_v2_ClientReportValidation() override;
-  explicit PROTOBUF_CONSTEXPR CMsgGCCStrike15_v2_ClientReportValidation(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  CMsgGCCStrike15_v2_ClientReportValidation(const CMsgGCCStrike15_v2_ClientReportValidation& from);
-  CMsgGCCStrike15_v2_ClientReportValidation(CMsgGCCStrike15_v2_ClientReportValidation&& from) noexcept
-    : CMsgGCCStrike15_v2_ClientReportValidation() {
-    *this = ::std::move(from);
-  }
-
-  inline CMsgGCCStrike15_v2_ClientReportValidation& operator=(const CMsgGCCStrike15_v2_ClientReportValidation& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline CMsgGCCStrike15_v2_ClientReportValidation& operator=(CMsgGCCStrike15_v2_ClientReportValidation&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const CMsgGCCStrike15_v2_ClientReportValidation& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const CMsgGCCStrike15_v2_ClientReportValidation* internal_default_instance() {
-    return reinterpret_cast<const CMsgGCCStrike15_v2_ClientReportValidation*>(
-               &_CMsgGCCStrike15_v2_ClientReportValidation_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    171;
-
-  friend void swap(CMsgGCCStrike15_v2_ClientReportValidation& a, CMsgGCCStrike15_v2_ClientReportValidation& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(CMsgGCCStrike15_v2_ClientReportValidation* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(CMsgGCCStrike15_v2_ClientReportValidation* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  CMsgGCCStrike15_v2_ClientReportValidation* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<CMsgGCCStrike15_v2_ClientReportValidation>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const CMsgGCCStrike15_v2_ClientReportValidation& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const CMsgGCCStrike15_v2_ClientReportValidation& from) {
-    CMsgGCCStrike15_v2_ClientReportValidation::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(CMsgGCCStrike15_v2_ClientReportValidation* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "CMsgGCCStrike15_v2_ClientReportValidation";
-  }
-  protected:
-  explicit CMsgGCCStrike15_v2_ClientReportValidation(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kDiagnosticsFieldNumber = 20,
-    kFileReportFieldNumber = 1,
-    kCommandLineFieldNumber = 2,
-    kLastLaunchDataFieldNumber = 15,
-    kTotalFilesFieldNumber = 3,
-    kInternalErrorFieldNumber = 4,
-    kTrustTimeFieldNumber = 5,
-    kCountPendingFieldNumber = 6,
-    kCountCompletedFieldNumber = 7,
-    kProcessIdFieldNumber = 8,
-    kOsversionFieldNumber = 9,
-    kClientreportversionFieldNumber = 10,
-    kStatusIdFieldNumber = 11,
-    kDiagnostic1FieldNumber = 12,
-    kDiagnostic2FieldNumber = 13,
-    kDiagnostic3FieldNumber = 14,
-    kClientTimeFieldNumber = 17,
-    kDiagnostic4FieldNumber = 18,
-    kDiagnostic5FieldNumber = 19,
-    kReportCountFieldNumber = 16,
-  };
-  // repeated .CVDiagnostic diagnostics = 20;
-  int diagnostics_size() const;
-  private:
-  int _internal_diagnostics_size() const;
-  public:
-  void clear_diagnostics();
-  ::CVDiagnostic* mutable_diagnostics(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CVDiagnostic >*
-      mutable_diagnostics();
-  private:
-  const ::CVDiagnostic& _internal_diagnostics(int index) const;
-  ::CVDiagnostic* _internal_add_diagnostics();
-  public:
-  const ::CVDiagnostic& diagnostics(int index) const;
-  ::CVDiagnostic* add_diagnostics();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CVDiagnostic >&
-      diagnostics() const;
-
-  // optional string file_report = 1;
-  bool has_file_report() const;
-  private:
-  bool _internal_has_file_report() const;
-  public:
-  void clear_file_report();
-  const std::string& file_report() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_file_report(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_file_report();
-  PROTOBUF_NODISCARD std::string* release_file_report();
-  void set_allocated_file_report(std::string* file_report);
-  private:
-  const std::string& _internal_file_report() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_file_report(const std::string& value);
-  std::string* _internal_mutable_file_report();
-  public:
-
-  // optional string command_line = 2;
-  bool has_command_line() const;
-  private:
-  bool _internal_has_command_line() const;
-  public:
-  void clear_command_line();
-  const std::string& command_line() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_command_line(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_command_line();
-  PROTOBUF_NODISCARD std::string* release_command_line();
-  void set_allocated_command_line(std::string* command_line);
-  private:
-  const std::string& _internal_command_line() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_command_line(const std::string& value);
-  std::string* _internal_mutable_command_line();
-  public:
-
-  // optional string last_launch_data = 15;
-  bool has_last_launch_data() const;
-  private:
-  bool _internal_has_last_launch_data() const;
-  public:
-  void clear_last_launch_data();
-  const std::string& last_launch_data() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_last_launch_data(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_last_launch_data();
-  PROTOBUF_NODISCARD std::string* release_last_launch_data();
-  void set_allocated_last_launch_data(std::string* last_launch_data);
-  private:
-  const std::string& _internal_last_launch_data() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_last_launch_data(const std::string& value);
-  std::string* _internal_mutable_last_launch_data();
-  public:
-
-  // optional uint32 total_files = 3;
-  bool has_total_files() const;
-  private:
-  bool _internal_has_total_files() const;
-  public:
-  void clear_total_files();
-  uint32_t total_files() const;
-  void set_total_files(uint32_t value);
-  private:
-  uint32_t _internal_total_files() const;
-  void _internal_set_total_files(uint32_t value);
-  public:
-
-  // optional uint32 internal_error = 4;
-  bool has_internal_error() const;
-  private:
-  bool _internal_has_internal_error() const;
-  public:
-  void clear_internal_error();
-  uint32_t internal_error() const;
-  void set_internal_error(uint32_t value);
-  private:
-  uint32_t _internal_internal_error() const;
-  void _internal_set_internal_error(uint32_t value);
-  public:
-
-  // optional uint32 trust_time = 5;
-  bool has_trust_time() const;
-  private:
-  bool _internal_has_trust_time() const;
-  public:
-  void clear_trust_time();
-  uint32_t trust_time() const;
-  void set_trust_time(uint32_t value);
-  private:
-  uint32_t _internal_trust_time() const;
-  void _internal_set_trust_time(uint32_t value);
-  public:
-
-  // optional uint32 count_pending = 6;
-  bool has_count_pending() const;
-  private:
-  bool _internal_has_count_pending() const;
-  public:
-  void clear_count_pending();
-  uint32_t count_pending() const;
-  void set_count_pending(uint32_t value);
-  private:
-  uint32_t _internal_count_pending() const;
-  void _internal_set_count_pending(uint32_t value);
-  public:
-
-  // optional uint32 count_completed = 7;
-  bool has_count_completed() const;
-  private:
-  bool _internal_has_count_completed() const;
-  public:
-  void clear_count_completed();
-  uint32_t count_completed() const;
-  void set_count_completed(uint32_t value);
-  private:
-  uint32_t _internal_count_completed() const;
-  void _internal_set_count_completed(uint32_t value);
-  public:
-
-  // optional uint32 process_id = 8;
-  bool has_process_id() const;
-  private:
-  bool _internal_has_process_id() const;
-  public:
-  void clear_process_id();
-  uint32_t process_id() const;
-  void set_process_id(uint32_t value);
-  private:
-  uint32_t _internal_process_id() const;
-  void _internal_set_process_id(uint32_t value);
-  public:
-
-  // optional int32 osversion = 9;
-  bool has_osversion() const;
-  private:
-  bool _internal_has_osversion() const;
-  public:
-  void clear_osversion();
-  int32_t osversion() const;
-  void set_osversion(int32_t value);
-  private:
-  int32_t _internal_osversion() const;
-  void _internal_set_osversion(int32_t value);
-  public:
-
-  // optional uint32 clientreportversion = 10;
-  bool has_clientreportversion() const;
-  private:
-  bool _internal_has_clientreportversion() const;
-  public:
-  void clear_clientreportversion();
-  uint32_t clientreportversion() const;
-  void set_clientreportversion(uint32_t value);
-  private:
-  uint32_t _internal_clientreportversion() const;
-  void _internal_set_clientreportversion(uint32_t value);
-  public:
-
-  // optional uint32 status_id = 11;
-  bool has_status_id() const;
-  private:
-  bool _internal_has_status_id() const;
-  public:
-  void clear_status_id();
-  uint32_t status_id() const;
-  void set_status_id(uint32_t value);
-  private:
-  uint32_t _internal_status_id() const;
-  void _internal_set_status_id(uint32_t value);
-  public:
-
-  // optional uint32 diagnostic1 = 12;
-  bool has_diagnostic1() const;
-  private:
-  bool _internal_has_diagnostic1() const;
-  public:
-  void clear_diagnostic1();
-  uint32_t diagnostic1() const;
-  void set_diagnostic1(uint32_t value);
-  private:
-  uint32_t _internal_diagnostic1() const;
-  void _internal_set_diagnostic1(uint32_t value);
-  public:
-
-  // optional uint64 diagnostic2 = 13;
-  bool has_diagnostic2() const;
-  private:
-  bool _internal_has_diagnostic2() const;
-  public:
-  void clear_diagnostic2();
-  uint64_t diagnostic2() const;
-  void set_diagnostic2(uint64_t value);
-  private:
-  uint64_t _internal_diagnostic2() const;
-  void _internal_set_diagnostic2(uint64_t value);
-  public:
-
-  // optional uint64 diagnostic3 = 14;
-  bool has_diagnostic3() const;
-  private:
-  bool _internal_has_diagnostic3() const;
-  public:
-  void clear_diagnostic3();
-  uint64_t diagnostic3() const;
-  void set_diagnostic3(uint64_t value);
-  private:
-  uint64_t _internal_diagnostic3() const;
-  void _internal_set_diagnostic3(uint64_t value);
-  public:
-
-  // optional uint64 client_time = 17;
-  bool has_client_time() const;
-  private:
-  bool _internal_has_client_time() const;
-  public:
-  void clear_client_time();
-  uint64_t client_time() const;
-  void set_client_time(uint64_t value);
-  private:
-  uint64_t _internal_client_time() const;
-  void _internal_set_client_time(uint64_t value);
-  public:
-
-  // optional uint64 diagnostic4 = 18;
-  bool has_diagnostic4() const;
-  private:
-  bool _internal_has_diagnostic4() const;
-  public:
-  void clear_diagnostic4();
-  uint64_t diagnostic4() const;
-  void set_diagnostic4(uint64_t value);
-  private:
-  uint64_t _internal_diagnostic4() const;
-  void _internal_set_diagnostic4(uint64_t value);
-  public:
-
-  // optional uint64 diagnostic5 = 19;
-  bool has_diagnostic5() const;
-  private:
-  bool _internal_has_diagnostic5() const;
-  public:
-  void clear_diagnostic5();
-  uint64_t diagnostic5() const;
-  void set_diagnostic5(uint64_t value);
-  private:
-  uint64_t _internal_diagnostic5() const;
-  void _internal_set_diagnostic5(uint64_t value);
-  public:
-
-  // optional uint32 report_count = 16;
-  bool has_report_count() const;
-  private:
-  bool _internal_has_report_count() const;
-  public:
-  void clear_report_count();
-  uint32_t report_count() const;
-  void set_report_count(uint32_t value);
-  private:
-  uint32_t _internal_report_count() const;
-  void _internal_set_report_count(uint32_t value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:CMsgGCCStrike15_v2_ClientReportValidation)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CVDiagnostic > diagnostics_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr file_report_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr command_line_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr last_launch_data_;
-    uint32_t total_files_;
-    uint32_t internal_error_;
-    uint32_t trust_time_;
-    uint32_t count_pending_;
-    uint32_t count_completed_;
-    uint32_t process_id_;
-    int32_t osversion_;
-    uint32_t clientreportversion_;
-    uint32_t status_id_;
-    uint32_t diagnostic1_;
-    uint64_t diagnostic2_;
-    uint64_t diagnostic3_;
-    uint64_t client_time_;
-    uint64_t diagnostic4_;
-    uint64_t diagnostic5_;
-    uint32_t report_count_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_cstrike15_5fgcmessages_2eproto;
-};
-// -------------------------------------------------------------------
-
 class CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode) */ {
  public:
@@ -40081,7 +39626,7 @@ class CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode final :
                &_CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    172;
+    171;
 
   friend void swap(CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode& a, CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode& b) {
     a.Swap(&b);
@@ -40371,7 +39916,7 @@ class CMsgGCCStrike15_v2_GC2ClientRequestValidation final :
                &_CMsgGCCStrike15_v2_GC2ClientRequestValidation_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    173;
+    172;
 
   friend void swap(CMsgGCCStrike15_v2_GC2ClientRequestValidation& a, CMsgGCCStrike15_v2_GC2ClientRequestValidation& b) {
     a.Swap(&b);
@@ -40551,7 +40096,7 @@ class CMsgGCCStrike15_v2_GC2ClientInitSystem final :
                &_CMsgGCCStrike15_v2_GC2ClientInitSystem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    174;
+    173;
 
   friend void swap(CMsgGCCStrike15_v2_GC2ClientInitSystem& a, CMsgGCCStrike15_v2_GC2ClientInitSystem& b) {
     a.Swap(&b);
@@ -40861,7 +40406,7 @@ class CMsgGCCStrike15_v2_GC2ClientInitSystem_Response final :
                &_CMsgGCCStrike15_v2_GC2ClientInitSystem_Response_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    175;
+    174;
 
   friend void swap(CMsgGCCStrike15_v2_GC2ClientInitSystem_Response& a, CMsgGCCStrike15_v2_GC2ClientInitSystem_Response& b) {
     a.Swap(&b);
@@ -41166,7 +40711,7 @@ class CMsgGCCStrike15_v2_SetPlayerLeaderboardSafeName final :
                &_CMsgGCCStrike15_v2_SetPlayerLeaderboardSafeName_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    176;
+    175;
 
   friend void swap(CMsgGCCStrike15_v2_SetPlayerLeaderboardSafeName& a, CMsgGCCStrike15_v2_SetPlayerLeaderboardSafeName& b) {
     a.Swap(&b);
@@ -41330,7 +40875,7 @@ class CMsgRequestRecurringMissionSchedule final :
                &_CMsgRequestRecurringMissionSchedule_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    177;
+    176;
 
   friend void swap(CMsgRequestRecurringMissionSchedule& a, CMsgRequestRecurringMissionSchedule& b) {
     a.Swap(&b);
@@ -41456,7 +41001,7 @@ class CMsgRecurringMissionSchema_MissionTemplateList final :
                &_CMsgRecurringMissionSchema_MissionTemplateList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    178;
+    177;
 
   friend void swap(CMsgRecurringMissionSchema_MissionTemplateList& a, CMsgRecurringMissionSchema_MissionTemplateList& b) {
     a.Swap(&b);
@@ -41642,7 +41187,7 @@ class CMsgRecurringMissionSchema final :
                &_CMsgRecurringMissionSchema_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    179;
+    178;
 
   friend void swap(CMsgRecurringMissionSchema& a, CMsgRecurringMissionSchema& b) {
     a.Swap(&b);
@@ -58260,6 +57805,34 @@ inline void CMsgGCCStrike15_v2_ClientRequestJoinFriendData::set_allocated_errorm
   // @@protoc_insertion_point(field_set_allocated:CMsgGCCStrike15_v2_ClientRequestJoinFriendData.errormsg)
 }
 
+// optional bool is_local_server = 7;
+inline bool CMsgGCCStrike15_v2_ClientRequestJoinFriendData::_internal_has_is_local_server() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  return value;
+}
+inline bool CMsgGCCStrike15_v2_ClientRequestJoinFriendData::has_is_local_server() const {
+  return _internal_has_is_local_server();
+}
+inline void CMsgGCCStrike15_v2_ClientRequestJoinFriendData::clear_is_local_server() {
+  _impl_.is_local_server_ = false;
+  _impl_._has_bits_[0] &= ~0x00000040u;
+}
+inline bool CMsgGCCStrike15_v2_ClientRequestJoinFriendData::_internal_is_local_server() const {
+  return _impl_.is_local_server_;
+}
+inline bool CMsgGCCStrike15_v2_ClientRequestJoinFriendData::is_local_server() const {
+  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientRequestJoinFriendData.is_local_server)
+  return _internal_is_local_server();
+}
+inline void CMsgGCCStrike15_v2_ClientRequestJoinFriendData::_internal_set_is_local_server(bool value) {
+  _impl_._has_bits_[0] |= 0x00000040u;
+  _impl_.is_local_server_ = value;
+}
+inline void CMsgGCCStrike15_v2_ClientRequestJoinFriendData::set_is_local_server(bool value) {
+  _internal_set_is_local_server(value);
+  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientRequestJoinFriendData.is_local_server)
+}
+
 // -------------------------------------------------------------------
 
 // CMsgGCCStrike15_v2_ClientRequestJoinServerData
@@ -72910,702 +72483,6 @@ inline void CVDiagnostic::set_allocated_string_value(std::string* string_value) 
 
 // -------------------------------------------------------------------
 
-// CMsgGCCStrike15_v2_ClientReportValidation
-
-// optional string file_report = 1;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_file_report() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_file_report() const {
-  return _internal_has_file_report();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_file_report() {
-  _impl_.file_report_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline const std::string& CMsgGCCStrike15_v2_ClientReportValidation::file_report() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.file_report)
-  return _internal_file_report();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void CMsgGCCStrike15_v2_ClientReportValidation::set_file_report(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000001u;
- _impl_.file_report_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.file_report)
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::mutable_file_report() {
-  std::string* _s = _internal_mutable_file_report();
-  // @@protoc_insertion_point(field_mutable:CMsgGCCStrike15_v2_ClientReportValidation.file_report)
-  return _s;
-}
-inline const std::string& CMsgGCCStrike15_v2_ClientReportValidation::_internal_file_report() const {
-  return _impl_.file_report_.Get();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_file_report(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.file_report_.Set(value, GetArenaForAllocation());
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::_internal_mutable_file_report() {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.file_report_.Mutable(GetArenaForAllocation());
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::release_file_report() {
-  // @@protoc_insertion_point(field_release:CMsgGCCStrike15_v2_ClientReportValidation.file_report)
-  if (!_internal_has_file_report()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* p = _impl_.file_report_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.file_report_.IsDefault()) {
-    _impl_.file_report_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_allocated_file_report(std::string* file_report) {
-  if (file_report != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  _impl_.file_report_.SetAllocated(file_report, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.file_report_.IsDefault()) {
-    _impl_.file_report_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:CMsgGCCStrike15_v2_ClientReportValidation.file_report)
-}
-
-// optional string command_line = 2;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_command_line() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_command_line() const {
-  return _internal_has_command_line();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_command_line() {
-  _impl_.command_line_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline const std::string& CMsgGCCStrike15_v2_ClientReportValidation::command_line() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.command_line)
-  return _internal_command_line();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void CMsgGCCStrike15_v2_ClientReportValidation::set_command_line(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000002u;
- _impl_.command_line_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.command_line)
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::mutable_command_line() {
-  std::string* _s = _internal_mutable_command_line();
-  // @@protoc_insertion_point(field_mutable:CMsgGCCStrike15_v2_ClientReportValidation.command_line)
-  return _s;
-}
-inline const std::string& CMsgGCCStrike15_v2_ClientReportValidation::_internal_command_line() const {
-  return _impl_.command_line_.Get();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_command_line(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.command_line_.Set(value, GetArenaForAllocation());
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::_internal_mutable_command_line() {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  return _impl_.command_line_.Mutable(GetArenaForAllocation());
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::release_command_line() {
-  // @@protoc_insertion_point(field_release:CMsgGCCStrike15_v2_ClientReportValidation.command_line)
-  if (!_internal_has_command_line()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  auto* p = _impl_.command_line_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.command_line_.IsDefault()) {
-    _impl_.command_line_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_allocated_command_line(std::string* command_line) {
-  if (command_line != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-  _impl_.command_line_.SetAllocated(command_line, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.command_line_.IsDefault()) {
-    _impl_.command_line_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:CMsgGCCStrike15_v2_ClientReportValidation.command_line)
-}
-
-// optional uint32 total_files = 3;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_total_files() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_total_files() const {
-  return _internal_has_total_files();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_total_files() {
-  _impl_.total_files_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000008u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_total_files() const {
-  return _impl_.total_files_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::total_files() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.total_files)
-  return _internal_total_files();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_total_files(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000008u;
-  _impl_.total_files_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_total_files(uint32_t value) {
-  _internal_set_total_files(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.total_files)
-}
-
-// optional uint32 internal_error = 4;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_internal_error() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_internal_error() const {
-  return _internal_has_internal_error();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_internal_error() {
-  _impl_.internal_error_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000010u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_internal_error() const {
-  return _impl_.internal_error_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::internal_error() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.internal_error)
-  return _internal_internal_error();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_internal_error(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000010u;
-  _impl_.internal_error_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_internal_error(uint32_t value) {
-  _internal_set_internal_error(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.internal_error)
-}
-
-// optional uint32 trust_time = 5;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_trust_time() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_trust_time() const {
-  return _internal_has_trust_time();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_trust_time() {
-  _impl_.trust_time_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000020u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_trust_time() const {
-  return _impl_.trust_time_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::trust_time() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.trust_time)
-  return _internal_trust_time();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_trust_time(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000020u;
-  _impl_.trust_time_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_trust_time(uint32_t value) {
-  _internal_set_trust_time(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.trust_time)
-}
-
-// optional uint32 count_pending = 6;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_count_pending() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_count_pending() const {
-  return _internal_has_count_pending();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_count_pending() {
-  _impl_.count_pending_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000040u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_count_pending() const {
-  return _impl_.count_pending_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::count_pending() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.count_pending)
-  return _internal_count_pending();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_count_pending(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000040u;
-  _impl_.count_pending_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_count_pending(uint32_t value) {
-  _internal_set_count_pending(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.count_pending)
-}
-
-// optional uint32 count_completed = 7;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_count_completed() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_count_completed() const {
-  return _internal_has_count_completed();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_count_completed() {
-  _impl_.count_completed_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000080u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_count_completed() const {
-  return _impl_.count_completed_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::count_completed() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.count_completed)
-  return _internal_count_completed();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_count_completed(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000080u;
-  _impl_.count_completed_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_count_completed(uint32_t value) {
-  _internal_set_count_completed(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.count_completed)
-}
-
-// optional uint32 process_id = 8;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_process_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_process_id() const {
-  return _internal_has_process_id();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_process_id() {
-  _impl_.process_id_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000100u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_process_id() const {
-  return _impl_.process_id_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::process_id() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.process_id)
-  return _internal_process_id();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_process_id(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000100u;
-  _impl_.process_id_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_process_id(uint32_t value) {
-  _internal_set_process_id(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.process_id)
-}
-
-// optional int32 osversion = 9;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_osversion() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_osversion() const {
-  return _internal_has_osversion();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_osversion() {
-  _impl_.osversion_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000200u;
-}
-inline int32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_osversion() const {
-  return _impl_.osversion_;
-}
-inline int32_t CMsgGCCStrike15_v2_ClientReportValidation::osversion() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.osversion)
-  return _internal_osversion();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_osversion(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000200u;
-  _impl_.osversion_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_osversion(int32_t value) {
-  _internal_set_osversion(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.osversion)
-}
-
-// optional uint32 clientreportversion = 10;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_clientreportversion() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_clientreportversion() const {
-  return _internal_has_clientreportversion();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_clientreportversion() {
-  _impl_.clientreportversion_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000400u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_clientreportversion() const {
-  return _impl_.clientreportversion_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::clientreportversion() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.clientreportversion)
-  return _internal_clientreportversion();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_clientreportversion(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000400u;
-  _impl_.clientreportversion_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_clientreportversion(uint32_t value) {
-  _internal_set_clientreportversion(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.clientreportversion)
-}
-
-// optional uint32 status_id = 11;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_status_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000800u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_status_id() const {
-  return _internal_has_status_id();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_status_id() {
-  _impl_.status_id_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000800u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_status_id() const {
-  return _impl_.status_id_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::status_id() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.status_id)
-  return _internal_status_id();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_status_id(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000800u;
-  _impl_.status_id_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_status_id(uint32_t value) {
-  _internal_set_status_id(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.status_id)
-}
-
-// optional uint32 diagnostic1 = 12;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_diagnostic1() const {
-  bool value = (_impl_._has_bits_[0] & 0x00001000u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_diagnostic1() const {
-  return _internal_has_diagnostic1();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_diagnostic1() {
-  _impl_.diagnostic1_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00001000u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_diagnostic1() const {
-  return _impl_.diagnostic1_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::diagnostic1() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic1)
-  return _internal_diagnostic1();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_diagnostic1(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00001000u;
-  _impl_.diagnostic1_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_diagnostic1(uint32_t value) {
-  _internal_set_diagnostic1(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic1)
-}
-
-// optional uint64 diagnostic2 = 13;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_diagnostic2() const {
-  bool value = (_impl_._has_bits_[0] & 0x00002000u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_diagnostic2() const {
-  return _internal_has_diagnostic2();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_diagnostic2() {
-  _impl_.diagnostic2_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00002000u;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_diagnostic2() const {
-  return _impl_.diagnostic2_;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::diagnostic2() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic2)
-  return _internal_diagnostic2();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_diagnostic2(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00002000u;
-  _impl_.diagnostic2_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_diagnostic2(uint64_t value) {
-  _internal_set_diagnostic2(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic2)
-}
-
-// optional uint64 diagnostic3 = 14;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_diagnostic3() const {
-  bool value = (_impl_._has_bits_[0] & 0x00004000u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_diagnostic3() const {
-  return _internal_has_diagnostic3();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_diagnostic3() {
-  _impl_.diagnostic3_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00004000u;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_diagnostic3() const {
-  return _impl_.diagnostic3_;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::diagnostic3() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic3)
-  return _internal_diagnostic3();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_diagnostic3(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00004000u;
-  _impl_.diagnostic3_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_diagnostic3(uint64_t value) {
-  _internal_set_diagnostic3(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic3)
-}
-
-// optional string last_launch_data = 15;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_last_launch_data() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_last_launch_data() const {
-  return _internal_has_last_launch_data();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_last_launch_data() {
-  _impl_.last_launch_data_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-inline const std::string& CMsgGCCStrike15_v2_ClientReportValidation::last_launch_data() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.last_launch_data)
-  return _internal_last_launch_data();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void CMsgGCCStrike15_v2_ClientReportValidation::set_last_launch_data(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000004u;
- _impl_.last_launch_data_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.last_launch_data)
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::mutable_last_launch_data() {
-  std::string* _s = _internal_mutable_last_launch_data();
-  // @@protoc_insertion_point(field_mutable:CMsgGCCStrike15_v2_ClientReportValidation.last_launch_data)
-  return _s;
-}
-inline const std::string& CMsgGCCStrike15_v2_ClientReportValidation::_internal_last_launch_data() const {
-  return _impl_.last_launch_data_.Get();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_last_launch_data(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000004u;
-  _impl_.last_launch_data_.Set(value, GetArenaForAllocation());
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::_internal_mutable_last_launch_data() {
-  _impl_._has_bits_[0] |= 0x00000004u;
-  return _impl_.last_launch_data_.Mutable(GetArenaForAllocation());
-}
-inline std::string* CMsgGCCStrike15_v2_ClientReportValidation::release_last_launch_data() {
-  // @@protoc_insertion_point(field_release:CMsgGCCStrike15_v2_ClientReportValidation.last_launch_data)
-  if (!_internal_has_last_launch_data()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000004u;
-  auto* p = _impl_.last_launch_data_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.last_launch_data_.IsDefault()) {
-    _impl_.last_launch_data_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_allocated_last_launch_data(std::string* last_launch_data) {
-  if (last_launch_data != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000004u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
-  }
-  _impl_.last_launch_data_.SetAllocated(last_launch_data, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.last_launch_data_.IsDefault()) {
-    _impl_.last_launch_data_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:CMsgGCCStrike15_v2_ClientReportValidation.last_launch_data)
-}
-
-// optional uint32 report_count = 16;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_report_count() const {
-  bool value = (_impl_._has_bits_[0] & 0x00040000u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_report_count() const {
-  return _internal_has_report_count();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_report_count() {
-  _impl_.report_count_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00040000u;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_report_count() const {
-  return _impl_.report_count_;
-}
-inline uint32_t CMsgGCCStrike15_v2_ClientReportValidation::report_count() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.report_count)
-  return _internal_report_count();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_report_count(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00040000u;
-  _impl_.report_count_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_report_count(uint32_t value) {
-  _internal_set_report_count(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.report_count)
-}
-
-// optional uint64 client_time = 17;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_client_time() const {
-  bool value = (_impl_._has_bits_[0] & 0x00008000u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_client_time() const {
-  return _internal_has_client_time();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_client_time() {
-  _impl_.client_time_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00008000u;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_client_time() const {
-  return _impl_.client_time_;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::client_time() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.client_time)
-  return _internal_client_time();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_client_time(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00008000u;
-  _impl_.client_time_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_client_time(uint64_t value) {
-  _internal_set_client_time(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.client_time)
-}
-
-// optional uint64 diagnostic4 = 18;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_diagnostic4() const {
-  bool value = (_impl_._has_bits_[0] & 0x00010000u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_diagnostic4() const {
-  return _internal_has_diagnostic4();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_diagnostic4() {
-  _impl_.diagnostic4_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00010000u;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_diagnostic4() const {
-  return _impl_.diagnostic4_;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::diagnostic4() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic4)
-  return _internal_diagnostic4();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_diagnostic4(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00010000u;
-  _impl_.diagnostic4_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_diagnostic4(uint64_t value) {
-  _internal_set_diagnostic4(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic4)
-}
-
-// optional uint64 diagnostic5 = 19;
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::_internal_has_diagnostic5() const {
-  bool value = (_impl_._has_bits_[0] & 0x00020000u) != 0;
-  return value;
-}
-inline bool CMsgGCCStrike15_v2_ClientReportValidation::has_diagnostic5() const {
-  return _internal_has_diagnostic5();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_diagnostic5() {
-  _impl_.diagnostic5_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00020000u;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::_internal_diagnostic5() const {
-  return _impl_.diagnostic5_;
-}
-inline uint64_t CMsgGCCStrike15_v2_ClientReportValidation::diagnostic5() const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic5)
-  return _internal_diagnostic5();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::_internal_set_diagnostic5(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00020000u;
-  _impl_.diagnostic5_ = value;
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::set_diagnostic5(uint64_t value) {
-  _internal_set_diagnostic5(value);
-  // @@protoc_insertion_point(field_set:CMsgGCCStrike15_v2_ClientReportValidation.diagnostic5)
-}
-
-// repeated .CVDiagnostic diagnostics = 20;
-inline int CMsgGCCStrike15_v2_ClientReportValidation::_internal_diagnostics_size() const {
-  return _impl_.diagnostics_.size();
-}
-inline int CMsgGCCStrike15_v2_ClientReportValidation::diagnostics_size() const {
-  return _internal_diagnostics_size();
-}
-inline void CMsgGCCStrike15_v2_ClientReportValidation::clear_diagnostics() {
-  _impl_.diagnostics_.Clear();
-}
-inline ::CVDiagnostic* CMsgGCCStrike15_v2_ClientReportValidation::mutable_diagnostics(int index) {
-  // @@protoc_insertion_point(field_mutable:CMsgGCCStrike15_v2_ClientReportValidation.diagnostics)
-  return _impl_.diagnostics_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CVDiagnostic >*
-CMsgGCCStrike15_v2_ClientReportValidation::mutable_diagnostics() {
-  // @@protoc_insertion_point(field_mutable_list:CMsgGCCStrike15_v2_ClientReportValidation.diagnostics)
-  return &_impl_.diagnostics_;
-}
-inline const ::CVDiagnostic& CMsgGCCStrike15_v2_ClientReportValidation::_internal_diagnostics(int index) const {
-  return _impl_.diagnostics_.Get(index);
-}
-inline const ::CVDiagnostic& CMsgGCCStrike15_v2_ClientReportValidation::diagnostics(int index) const {
-  // @@protoc_insertion_point(field_get:CMsgGCCStrike15_v2_ClientReportValidation.diagnostics)
-  return _internal_diagnostics(index);
-}
-inline ::CVDiagnostic* CMsgGCCStrike15_v2_ClientReportValidation::_internal_add_diagnostics() {
-  return _impl_.diagnostics_.Add();
-}
-inline ::CVDiagnostic* CMsgGCCStrike15_v2_ClientReportValidation::add_diagnostics() {
-  ::CVDiagnostic* _add = _internal_add_diagnostics();
-  // @@protoc_insertion_point(field_add:CMsgGCCStrike15_v2_ClientReportValidation.diagnostics)
-  return _add;
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::CVDiagnostic >&
-CMsgGCCStrike15_v2_ClientReportValidation::diagnostics() const {
-  // @@protoc_insertion_point(field_list:CMsgGCCStrike15_v2_ClientReportValidation.diagnostics)
-  return _impl_.diagnostics_;
-}
-
-// -------------------------------------------------------------------
-
 // CMsgGCCStrike15_v2_GC2ClientRefuseSecureMode
 
 // optional string file_report = 1;
@@ -75131,8 +74008,6 @@ CMsgRecurringMissionSchema::missions() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

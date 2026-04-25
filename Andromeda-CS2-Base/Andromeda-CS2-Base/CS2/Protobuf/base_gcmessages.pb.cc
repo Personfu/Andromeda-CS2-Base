@@ -1314,7 +1314,8 @@ PROTOBUF_CONSTEXPR CMsgOpenCrate::CMsgOpenCrate(
   , /*decltype(_impl_.tool_item_id_)*/uint64_t{0u}
   , /*decltype(_impl_.subject_item_id_)*/uint64_t{0u}
   , /*decltype(_impl_.for_rental_)*/false
-  , /*decltype(_impl_.points_remaining_)*/0u} {}
+  , /*decltype(_impl_.points_remaining_)*/0u
+  , /*decltype(_impl_.volatile_limit_)*/0u} {}
 struct CMsgOpenCrateDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CMsgOpenCrateDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -2371,10 +2372,12 @@ const uint32_t TableStruct_base_5fgcmessages_2eproto::offsets[] PROTOBUF_SECTION
   PROTOBUF_FIELD_OFFSET(::CMsgOpenCrate, _impl_.subject_item_id_),
   PROTOBUF_FIELD_OFFSET(::CMsgOpenCrate, _impl_.for_rental_),
   PROTOBUF_FIELD_OFFSET(::CMsgOpenCrate, _impl_.points_remaining_),
+  PROTOBUF_FIELD_OFFSET(::CMsgOpenCrate, _impl_.volatile_limit_),
   0,
   1,
   2,
   3,
+  4,
   PROTOBUF_FIELD_OFFSET(::CSOEconRentalHistory, _impl_._has_bits_),
   PROTOBUF_FIELD_OFFSET(::CSOEconRentalHistory, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2481,9 +2484,9 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 962, 973, -1, sizeof(::CSOEconEquipSlot)},
   { 978, 987, -1, sizeof(::CMsgAdjustEquipSlot)},
   { 990, 998, -1, sizeof(::CMsgAdjustEquipSlots)},
-  { 1000, 1010, -1, sizeof(::CMsgOpenCrate)},
-  { 1014, 1025, -1, sizeof(::CSOEconRentalHistory)},
-  { 1030, 1037, -1, sizeof(::CMsgAcknowledgeRentalExpiration)},
+  { 1000, 1011, -1, sizeof(::CMsgOpenCrate)},
+  { 1016, 1027, -1, sizeof(::CSOEconRentalHistory)},
+  { 1032, 1039, -1, sizeof(::CMsgAcknowledgeRentalExpiration)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -2782,38 +2785,39 @@ const char descriptor_table_protodef_base_5fgcmessages_2eproto[] PROTOBUF_SECTIO
   "\r\"I\n\023CMsgAdjustEquipSlot\022\020\n\010class_id\030\001 \001"
   "(\r\022\017\n\007slot_id\030\002 \001(\r\022\017\n\007item_id\030\003 \001(\004\"O\n\024"
   "CMsgAdjustEquipSlots\022#\n\005slots\030\001 \003(\0132\024.CM"
-  "sgAdjustEquipSlot\022\022\n\nchange_num\030\002 \001(\r\"l\n"
-  "\rCMsgOpenCrate\022\024\n\014tool_item_id\030\001 \001(\004\022\027\n\017"
-  "subject_item_id\030\002 \001(\004\022\022\n\nfor_rental\030\003 \001("
-  "\010\022\030\n\020points_remaining\030\004 \001(\r\"\223\001\n\024CSOEconR"
-  "entalHistory\022\030\n\naccount_id\030\001 \001(\rB\004\200\246\035\001\022\033"
-  "\n\rcrate_item_id\030\002 \001(\004B\004\200\246\035\001\022\027\n\017crate_def"
-  "_index\030\003 \001(\r\022\022\n\nissue_date\030\004 \001(\r\022\027\n\017expi"
-  "ration_date\030\005 \001(\r\"8\n\037CMsgAcknowledgeRent"
-  "alExpiration\022\025\n\rcrate_item_id\030\001 \001(\004*\307\003\n\n"
-  "EGCBaseMsg\022\032\n\025k_EMsgGCSystemMessage\020\241\037\022\035"
-  "\n\030k_EMsgGCReplicateConVars\020\242\037\022\032\n\025k_EMsgG"
-  "CConVarUpdated\020\243\037\022\024\n\017k_EMsgGCInQueue\020\250\037\022"
-  "\032\n\025k_EMsgGCInviteToParty\020\225#\022\036\n\031k_EMsgGCI"
-  "nvitationCreated\020\226#\022 \n\033k_EMsgGCPartyInvi"
-  "teResponse\020\227#\022\032\n\025k_EMsgGCKickFromParty\020\230"
-  "#\022\027\n\022k_EMsgGCLeaveParty\020\231#\022\034\n\027k_EMsgGCSe"
-  "rverAvailable\020\232#\022\"\n\035k_EMsgGCClientConnec"
-  "tToServer\020\233#\022\033\n\026k_EMsgGCGameServerInfo\020\234"
-  "#\022\022\n\rk_EMsgGCError\020\235#\022%\n k_EMsgGCReplay_"
-  "UploadedToYouTube\020\236#\022\037\n\032k_EMsgGCLANServe"
-  "rAvailable\020\237#*Y\n\027EGCBaseProtoObjectTypes"
-  "\022\036\n\031k_EProtoObjectPartyInvite\020\351\007\022\036\n\031k_EP"
-  "rotoObjectLobbyInvite\020\352\007*T\n\021GC_BannedWor"
-  "dType\022\037\n\033GC_BANNED_WORD_DISABLE_WORD\020\000\022\036"
-  "\n\032GC_BANNED_WORD_ENABLE_WORD\020\001"
+  "sgAdjustEquipSlot\022\022\n\nchange_num\030\002 \001(\r\"\204\001"
+  "\n\rCMsgOpenCrate\022\024\n\014tool_item_id\030\001 \001(\004\022\027\n"
+  "\017subject_item_id\030\002 \001(\004\022\022\n\nfor_rental\030\003 \001"
+  "(\010\022\030\n\020points_remaining\030\004 \001(\r\022\026\n\016volatile"
+  "_limit\030\005 \001(\r\"\223\001\n\024CSOEconRentalHistory\022\030\n"
+  "\naccount_id\030\001 \001(\rB\004\200\246\035\001\022\033\n\rcrate_item_id"
+  "\030\002 \001(\004B\004\200\246\035\001\022\027\n\017crate_def_index\030\003 \001(\r\022\022\n"
+  "\nissue_date\030\004 \001(\r\022\027\n\017expiration_date\030\005 \001"
+  "(\r\"8\n\037CMsgAcknowledgeRentalExpiration\022\025\n"
+  "\rcrate_item_id\030\001 \001(\004*\307\003\n\nEGCBaseMsg\022\032\n\025k"
+  "_EMsgGCSystemMessage\020\241\037\022\035\n\030k_EMsgGCRepli"
+  "cateConVars\020\242\037\022\032\n\025k_EMsgGCConVarUpdated\020"
+  "\243\037\022\024\n\017k_EMsgGCInQueue\020\250\037\022\032\n\025k_EMsgGCInvi"
+  "teToParty\020\225#\022\036\n\031k_EMsgGCInvitationCreate"
+  "d\020\226#\022 \n\033k_EMsgGCPartyInviteResponse\020\227#\022\032"
+  "\n\025k_EMsgGCKickFromParty\020\230#\022\027\n\022k_EMsgGCLe"
+  "aveParty\020\231#\022\034\n\027k_EMsgGCServerAvailable\020\232"
+  "#\022\"\n\035k_EMsgGCClientConnectToServer\020\233#\022\033\n"
+  "\026k_EMsgGCGameServerInfo\020\234#\022\022\n\rk_EMsgGCEr"
+  "ror\020\235#\022%\n k_EMsgGCReplay_UploadedToYouTu"
+  "be\020\236#\022\037\n\032k_EMsgGCLANServerAvailable\020\237#*Y"
+  "\n\027EGCBaseProtoObjectTypes\022\036\n\031k_EProtoObj"
+  "ectPartyInvite\020\351\007\022\036\n\031k_EProtoObjectLobby"
+  "Invite\020\352\007*T\n\021GC_BannedWordType\022\037\n\033GC_BAN"
+  "NED_WORD_DISABLE_WORD\020\000\022\036\n\032GC_BANNED_WOR"
+  "D_ENABLE_WORD\020\001"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_base_5fgcmessages_2eproto_deps[1] = {
   &::descriptor_table_steammessages_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_base_5fgcmessages_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_base_5fgcmessages_2eproto = {
-    false, false, 9350, descriptor_table_protodef_base_5fgcmessages_2eproto,
+    false, false, 9375, descriptor_table_protodef_base_5fgcmessages_2eproto,
     "base_gcmessages.proto",
     &descriptor_table_base_5fgcmessages_2eproto_once, descriptor_table_base_5fgcmessages_2eproto_deps, 1, 83,
     schemas, file_default_instances, TableStruct_base_5fgcmessages_2eproto::offsets,
@@ -24855,6 +24859,9 @@ class CMsgOpenCrate::_Internal {
   static void set_has_points_remaining(HasBits* has_bits) {
     (*has_bits)[0] |= 8u;
   }
+  static void set_has_volatile_limit(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
+  }
 };
 
 CMsgOpenCrate::CMsgOpenCrate(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -24872,12 +24879,13 @@ CMsgOpenCrate::CMsgOpenCrate(const CMsgOpenCrate& from)
     , decltype(_impl_.tool_item_id_){}
     , decltype(_impl_.subject_item_id_){}
     , decltype(_impl_.for_rental_){}
-    , decltype(_impl_.points_remaining_){}};
+    , decltype(_impl_.points_remaining_){}
+    , decltype(_impl_.volatile_limit_){}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&_impl_.tool_item_id_, &from._impl_.tool_item_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.points_remaining_) -
-    reinterpret_cast<char*>(&_impl_.tool_item_id_)) + sizeof(_impl_.points_remaining_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.volatile_limit_) -
+    reinterpret_cast<char*>(&_impl_.tool_item_id_)) + sizeof(_impl_.volatile_limit_));
   // @@protoc_insertion_point(copy_constructor:CMsgOpenCrate)
 }
 
@@ -24892,6 +24900,7 @@ inline void CMsgOpenCrate::SharedCtor(
     , decltype(_impl_.subject_item_id_){uint64_t{0u}}
     , decltype(_impl_.for_rental_){false}
     , decltype(_impl_.points_remaining_){0u}
+    , decltype(_impl_.volatile_limit_){0u}
   };
 }
 
@@ -24919,10 +24928,10 @@ void CMsgOpenCrate::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     ::memset(&_impl_.tool_item_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&_impl_.points_remaining_) -
-        reinterpret_cast<char*>(&_impl_.tool_item_id_)) + sizeof(_impl_.points_remaining_));
+        reinterpret_cast<char*>(&_impl_.volatile_limit_) -
+        reinterpret_cast<char*>(&_impl_.tool_item_id_)) + sizeof(_impl_.volatile_limit_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -24967,6 +24976,15 @@ const char* CMsgOpenCrate::_InternalParse(const char* ptr, ::_pbi::ParseContext*
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           _Internal::set_has_points_remaining(&has_bits);
           _impl_.points_remaining_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional uint32 volatile_limit = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          _Internal::set_has_volatile_limit(&has_bits);
+          _impl_.volatile_limit_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -25026,6 +25044,12 @@ uint8_t* CMsgOpenCrate::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_points_remaining(), target);
   }
 
+  // optional uint32 volatile_limit = 5;
+  if (cached_has_bits & 0x00000010u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(5, this->_internal_volatile_limit(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -25043,7 +25067,7 @@ size_t CMsgOpenCrate::ByteSizeLong() const {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     // optional uint64 tool_item_id = 1;
     if (cached_has_bits & 0x00000001u) {
       total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_tool_item_id());
@@ -25062,6 +25086,11 @@ size_t CMsgOpenCrate::ByteSizeLong() const {
     // optional uint32 points_remaining = 4;
     if (cached_has_bits & 0x00000008u) {
       total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_points_remaining());
+    }
+
+    // optional uint32 volatile_limit = 5;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_volatile_limit());
     }
 
   }
@@ -25084,7 +25113,7 @@ void CMsgOpenCrate::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       _this->_impl_.tool_item_id_ = from._impl_.tool_item_id_;
     }
@@ -25096,6 +25125,9 @@ void CMsgOpenCrate::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
     }
     if (cached_has_bits & 0x00000008u) {
       _this->_impl_.points_remaining_ = from._impl_.points_remaining_;
+    }
+    if (cached_has_bits & 0x00000010u) {
+      _this->_impl_.volatile_limit_ = from._impl_.volatile_limit_;
     }
     _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
@@ -25118,8 +25150,8 @@ void CMsgOpenCrate::InternalSwap(CMsgOpenCrate* other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(CMsgOpenCrate, _impl_.points_remaining_)
-      + sizeof(CMsgOpenCrate::_impl_.points_remaining_)
+      PROTOBUF_FIELD_OFFSET(CMsgOpenCrate, _impl_.volatile_limit_)
+      + sizeof(CMsgOpenCrate::_impl_.volatile_limit_)
       - PROTOBUF_FIELD_OFFSET(CMsgOpenCrate, _impl_.tool_item_id_)>(
           reinterpret_cast<char*>(&_impl_.tool_item_id_),
           reinterpret_cast<char*>(&other->_impl_.tool_item_id_));

@@ -243,7 +243,7 @@ GetGameEntitySystemPointer:;
 	{
 		if ( !g_ppCGlobalVarsBase )
 		{
-			auto ppCGlobalVarsBase = reinterpret_cast<uintptr_t>( FindPattern( CLIENT_DLL , XorStr( "48 8B ? ? ? ? ? 8B 48 04 FF C1 89 8B 88 06 00 00 48 8B CB E8 ? ? ? ? F3 0F 10 ? ? ? ? ? 48 8D 4C 24 60 E8 ? ? ? ? 45 8B CE" ) ) );
+			auto ppCGlobalVarsBase = reinterpret_cast<uintptr_t>( FindPattern( CLIENT_DLL , XorStr( "48 8B ? ? ? ? ? 8B 48 04 FF C1 89 8B 80 06 00 00 48 8B CB E8 ? ? ? ? F3 0F 10 ? ? ? ? ? 48 8D 4C 24 60 E8 ? ? ? ? 45 8B CE 48 8D ? ? ? ? ? 48 8B CB 44 8B 00" ) ) );
 
 			if ( !ppCGlobalVarsBase )
 				return nullptr;
@@ -258,7 +258,7 @@ GetGameEntitySystemPointer:;
 	{
 		if ( !g_ppIVPhysics2World )
 		{
-			auto ppIVPhysics2World = reinterpret_cast<uintptr_t>( FindPattern( CLIENT_DLL , XorStr( "48 8B 0D ? ? ? ? 48 8D 45 ? 48 89 44 24 ? 4C 8D 4C 24 ? 48 8D 45 ? 4C 8D 44 24 ? 48 89 44 24 ? 48 8D 95 ? ? ? ? E8 ? ? ? ? F2 0F 10 45" ) ) );
+			auto ppIVPhysics2World = reinterpret_cast<uintptr_t>( FindPattern( CLIENT_DLL , XorStr( "48 8B 1D ? ? ? ? 48 8B 01 FF 90 ? ? ? ? 4C 8B 0B 4C 8D 44 24 ? 48 8B C8" ) ) );
 
 			if ( !ppIVPhysics2World )
 				return nullptr;

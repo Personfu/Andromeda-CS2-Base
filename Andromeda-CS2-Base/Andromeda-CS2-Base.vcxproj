@@ -166,6 +166,7 @@
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_FireEventClientSide.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_FrameStageNotify.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_GetMatricesForView.cpp" />
+    <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_IsLoadoutAllowed.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_IsRelativeMouseMode.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_MouseInputEnabled.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_OnAddEntity.cpp" />
@@ -345,6 +346,7 @@
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_FireEventClientSide.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_FrameStageNotify.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_GetMatricesForView.hpp" />
+    <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_IsLoadoutAllowed.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_IsRelativeMouseMode.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_MouseInputEnabled.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_OnAddEntity.hpp" />

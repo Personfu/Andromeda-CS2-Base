@@ -462,6 +462,9 @@
     <ClCompile Include="Andromeda-CS2-Base\CS2\Protobuf\source2_steam_stats.pb.cc">
       <Filter>Andromeda-CS2-Base\CS2\Protobuf</Filter>
     </ClCompile>
+    <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_IsLoadoutAllowed.cpp">
+      <Filter>Andromeda-CS2-Base\CS2\Hook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Andromeda-CS2-Base\DllLauncher.hpp">
@@ -1102,6 +1105,9 @@
     </ClInclude>
     <ClInclude Include="Andromeda-CS2-Base\CS2\Protobuf\source2_steam_stats.pb.h">
       <Filter>Andromeda-CS2-Base\CS2\Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_IsLoadoutAllowed.hpp">
+      <Filter>Andromeda-CS2-Base\CS2\Hook</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
