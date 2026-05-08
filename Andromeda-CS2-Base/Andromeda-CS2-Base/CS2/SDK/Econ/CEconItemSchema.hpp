@@ -22,9 +22,9 @@ public:
     char pad4[0x4];  // no idea
     int nRarity;
 
-    uint8_t m_use_legacy_model()
+    uint8_t IsUseLegacyModel()
     {
-        return *reinterpret_cast<uint8_t*>( (std::uintptr_t)this + 0xAE );
+        return *reinterpret_cast<uint8_t*>( (uintptr_t)this + g_CCPaintKit_IsUseLegacyModel );
     }
 };
 
