@@ -165,6 +165,7 @@
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_AntiTamper.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_CreateMove.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_CreateSwapChain.cpp" />
+    <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_DrawGlow.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_EquipItemInLoadout.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_FireEventClientSide.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_FrameStageNotify.cpp" />
@@ -348,6 +349,7 @@
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_AntiTamper.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_CreateMove.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_CreateSwapChain.hpp" />
+    <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_DrawGlow.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_EquipItemInLoadout.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_FireEventClientSide.hpp" />
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_FrameStageNotify.hpp" />

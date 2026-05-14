@@ -124,6 +124,9 @@
     <Filter Include="Andromeda-CS2-Base\AndromedaClient\Features\CInventoryChanger">
       <UniqueIdentifier>{fe55cde6-ca84-4245-b799-edaad8c9c80d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Andromeda-CS2-Base\AndromedaClient\Features\CVisual">
+      <UniqueIdentifier>{8c1b7cf4-69bc-41fb-8a38-52d85347e1a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Andromeda-CS2-Base\DllLauncher.cpp">
@@ -450,9 +453,6 @@
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\GUI\CAndromedaMenu.cpp">
       <Filter>Andromeda-CS2-Base\AndromedaClient\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CVisual\CVisual.cpp">
-      <Filter>Andromeda-CS2-Base\AndromedaClient\Features</Filter>
-    </ClCompile>
     <ClCompile Include="Andromeda-CS2-Base\GameClient\CL_Bones.cpp">
       <Filter>Andromeda-CS2-Base\GameClient</Filter>
     </ClCompile>
@@ -475,6 +475,12 @@
       <Filter>Andromeda-CS2-Base\AndromedaClient\Features\CInventoryChanger</Filter>
     </ClCompile>
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_EquipItemInLoadout.cpp">
+      <Filter>Andromeda-CS2-Base\CS2\Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CVisual\CVisual.cpp">
+      <Filter>Andromeda-CS2-Base\AndromedaClient\Features\CVisual</Filter>
+    </ClCompile>
+    <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_DrawGlow.cpp">
       <Filter>Andromeda-CS2-Base\CS2\Hook</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1097,9 +1103,6 @@
     <ClInclude Include="Andromeda-CS2-Base\CS2\SDK\Interface\IEngineCvar.hpp">
       <Filter>Andromeda-CS2-Base\CS2\SDK\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Andromeda-CS2-Base\AndromedaClient\Features\CVisual\CVisual.hpp">
-      <Filter>Andromeda-CS2-Base\AndromedaClient\Features</Filter>
-    </ClInclude>
     <ClInclude Include="Andromeda-CS2-Base\Common\Base64.h">
       <Filter>Andromeda-CS2-Base\Common</Filter>
     </ClInclude>
@@ -1128,6 +1131,12 @@
       <Filter>Andromeda-CS2-Base\AndromedaClient\Features\CInventoryChanger</Filter>
     </ClInclude>
     <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_EquipItemInLoadout.hpp">
+      <Filter>Andromeda-CS2-Base\CS2\Hook</Filter>
+    </ClInclude>
+    <ClInclude Include="Andromeda-CS2-Base\AndromedaClient\Features\CVisual\CVisual.hpp">
+      <Filter>Andromeda-CS2-Base\AndromedaClient\Features\CVisual</Filter>
+    </ClInclude>
+    <ClInclude Include="Andromeda-CS2-Base\CS2\Hook\Hook_DrawGlow.hpp">
       <Filter>Andromeda-CS2-Base\CS2\Hook</Filter>
     </ClInclude>
   </ItemGroup>

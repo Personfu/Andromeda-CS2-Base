@@ -146,105 +146,6 @@ auto CVisual::OnRenderPlayerEsp( CCSPlayerController* pCCSPlayerController , con
 	}
 }
 
-auto CVisual::ApplyGlow( C_CSPlayerPawn* pC_CSPlayerPawn , const bool bVisible , const int iTeamNum ) -> void
-{
-	if ( !pC_CSPlayerPawn || !pC_CSPlayerPawn->IsPlayerPawn() )
-		return;
-
-	auto IsEnemy = false;
-	C_CSPlayerPawn* pLocalPawn = nullptr;
-
-	if ( auto* pLocalPlayerController = GetCL_Players()->GetLocalPlayerController(); pLocalPlayerController )
-	{
-		pLocalPawn = pLocalPlayerController->m_hPawn().Get<C_CSPlayerPawn>();
-		if ( pLocalPawn )
-		{
-			IsEnemy = iTeamNum != pLocalPawn->m_iTeamNum();
-
-			// Local player'dan glow'u kaldır
-			if ( pC_CSPlayerPawn == pLocalPawn )
-			{
-				auto& Glow = pC_CSPlayerPawn->m_Glow();
-				Glow.m_bGlowing() = false;
-				return;
-			}
-		}
-	}
-
-	auto DrawGlow = false;
-
-	if ( Settings::Visual::GlowTeam && !IsEnemy )
-		DrawGlow = true;
-
-	if ( Settings::Visual::GlowEnemy && IsEnemy )
-		DrawGlow = true;
-
-	if ( Settings::Visual::OnlyVisible && !bVisible )
-		DrawGlow = false;
-
-	if ( !DrawGlow )
-	{
-		// Glow'u kapat
-		auto& Glow = pC_CSPlayerPawn->m_Glow();
-		Glow.m_bGlowing() = false;
-		return;
-	}
-
-	auto GlowColor = Color( 255 , 255 , 255 , 255 );
-
-	if ( iTeamNum == TEAM_TT )
-	{
-		const auto& ColorVec = Settings::Colors::Visual::GlowTT;
-		if ( bVisible )
-		{
-			const auto& VisibleColorVec = Settings::Colors::Visual::GlowTT_Visible;
-			GlowColor = Color( 
-				static_cast<BYTE>( VisibleColorVec.x * 255.f ) , 
-				static_cast<BYTE>( VisibleColorVec.y * 255.f ) , 
-				static_cast<BYTE>( VisibleColorVec.z * 255.f ) , 
-				static_cast<BYTE>( VisibleColorVec.w * 255.f ) 
-			);
-		}
-		else
-		{
-			GlowColor = Color( 
-				static_cast<BYTE>( ColorVec.x * 255.f ) , 
-				static_cast<BYTE>( ColorVec.y * 255.f ) , 
-				static_cast<BYTE>( ColorVec.z * 255.f ) , 
-				static_cast<BYTE>( ColorVec.w * 255.f ) 
-			);
-		}
-	}
-	else if ( iTeamNum == TEAM_CT )
-	{
-		const auto& ColorVec = Settings::Colors::Visual::GlowCT;
-		if ( bVisible )
-		{
-			const auto& VisibleColorVec = Settings::Colors::Visual::GlowCT_Visible;
-			GlowColor = Color( 
-				static_cast<BYTE>( VisibleColorVec.x * 255.f ) , 
-				static_cast<BYTE>( VisibleColorVec.y * 255.f ) , 
-				static_cast<BYTE>( VisibleColorVec.z * 255.f ) , 
-				static_cast<BYTE>( VisibleColorVec.w * 255.f ) 
-			);
-		}
-		else
-		{
-			GlowColor = Color( 
-				static_cast<BYTE>( ColorVec.x * 255.f ) , 
-				static_cast<BYTE>( ColorVec.y * 255.f ) , 
-				static_cast<BYTE>( ColorVec.z * 255.f ) , 
-				static_cast<BYTE>( ColorVec.w * 255.f ) 
-			);
-		}
-	}
-
-	// Glow'u uygula
-	auto& Glow = pC_CSPlayerPawn->m_Glow();
-	Glow.m_bGlowing() = true;
-	Glow.m_glowColorOverride() = GlowColor;
-}
-
 auto CVisual::OnClientOutput() -> void
 {
 	OnRender();
@@ -276,19 +177,61 @@ auto CVisual::OnCreateMove() -> void
 				auto* pCCSPlayerController = reinterpret_cast<CCSPlayerController*>( pEntity );
 
 				CachedEntity.m_bVisible = GetCL_VisibleCheck()->IsPlayerControllerVisible( pCCSPlayerController );
-
-				if ( Settings::Visual::Glow && pCCSPlayerController->m_bPawnIsAlive() )
-				{
-					auto* pC_CSPlayerPawn = pCCSPlayerController->m_hPawn().Get<C_CSPlayerPawn>();
-					if ( pC_CSPlayerPawn && pC_CSPlayerPawn->IsPlayerPawn() )
-					{
-						ApplyGlow( pC_CSPlayerPawn , CachedEntity.m_bVisible , pCCSPlayerController->m_iTeamNum() );
-					}
-				}
 			}
 			break;
 			default:
 				break;
+		}
+	}
+}
+
+auto CVisual::OnDrawGlow( CGlowProperty* pCGlowProperty ) -> void
+{
+	if ( Settings::Visual::Active )
+	{
+		auto* pPlayerPawn = reinterpret_cast<C_CSPlayerPawn*>( pCGlowProperty->m_pOwner() );
+		auto* pLocalPlayerPawn = GetCL_Players()->GetLocalPlayerPawn();
+
+		if ( pPlayerPawn && pPlayerPawn->IsPlayerPawn() && pPlayerPawn->IsAlive() && pLocalPlayerPawn && pPlayerPawn != pLocalPlayerPawn )
+		{
+			auto SetGlove = true;
+			auto Visible = GetCL_VisibleCheck()->IsPlayerPawnVisible( pPlayerPawn );
+
+			if ( !Settings::Visual::Team && pPlayerPawn->m_iTeamNum() == pLocalPlayerPawn->m_iTeamNum() )
+				SetGlove = false;
+
+			if ( !Settings::Visual::Enemy && pPlayerPawn->m_iTeamNum() != pLocalPlayerPawn->m_iTeamNum() )
+				SetGlove = false;
+
+			if ( Settings::Visual::OnlyVisible && !Visible )
+				SetGlove = false;
+
+			if ( SetGlove )
+			{
+				auto PlayerColor = Color( 255 , 255 , 255 );
+
+				if ( pPlayerPawn->m_iTeamNum() == TEAM_TT )
+				{
+					PlayerColor = Color( static_cast<int>( Settings::Colors::Visual::GlowTT.x * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowTT.y * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowTT.z * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowTT.w * 255.f ) );
+
+					if ( Visible )
+						PlayerColor = Color( static_cast<int>( Settings::Colors::Visual::GlowTT_Visible.x * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowTT_Visible.y * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowTT_Visible.z * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowTT_Visible.w * 255.f ) );
+				}
+				else if ( pPlayerPawn->m_iTeamNum() == TEAM_CT )
+				{
+					PlayerColor = Color( static_cast<int>( Settings::Colors::Visual::GlowCT.x * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowCT.y * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowCT.z * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowCT.w * 255.f ) );	
+					if ( Visible )
+						PlayerColor = Color( static_cast<int>( Settings::Colors::Visual::GlowCT_Visible.x * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowCT_Visible.y * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowCT_Visible.z * 255.f ) , static_cast<int>( Settings::Colors::Visual::GlowCT_Visible.w * 255.f ) );
+				}
+
+				if ( Settings::Visual::Glow )
+				{
+					pCGlowProperty->m_glowColorOverride() = PlayerColor;
+					pCGlowProperty->m_bGlowing() = true;
+				}
+				else
+					pCGlowProperty->m_bGlowing() = false;
+			}
 		}
 	}
 }

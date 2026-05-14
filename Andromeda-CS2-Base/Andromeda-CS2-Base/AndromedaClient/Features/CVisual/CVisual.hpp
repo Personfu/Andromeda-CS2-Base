@@ -6,6 +6,7 @@
 
 class CCSPlayerController;
 class C_CSPlayerPawn;
+class CGlowProperty;
 
 class IVisual
 {
@@ -13,6 +14,7 @@ public:
 	virtual void OnRender() = 0;
 	virtual void OnClientOutput() = 0;
 	virtual void OnCreateMove() = 0;
+	virtual void OnDrawGlow( CGlowProperty* pCGlowProperty ) = 0;
 };
 
 class CVisual final : public IVisual
@@ -21,6 +23,7 @@ public:
 	virtual void OnRender() override;
 	virtual void OnClientOutput() override;
 	virtual void OnCreateMove() override;
+	virtual void OnDrawGlow( CGlowProperty* pCGlowProperty ) override;
 
 private:
 	enum EVisualBoxType_t : int32_t
@@ -34,7 +37,6 @@ private:
 
 	auto OnRenderPlayerEsp( CCSPlayerController* pCCSPlayerController , const Rect_t& bBox , const bool bVisible ) -> void;
 	auto DrawBoneESP( C_CSPlayerPawn* pC_CSPlayerPawn , const bool bVisible , const int iTeamNum ) -> void;
-	auto ApplyGlow( C_CSPlayerPawn* pC_CSPlayerPawn , const bool bVisible , const int iTeamNum ) -> void;
 
 public:
 	auto CalculateBoundingBoxes() -> void;
