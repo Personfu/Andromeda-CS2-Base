@@ -16,6 +16,40 @@ auto CAndromedaMenu::OnRenderMenu() -> void
 
 	if ( ImGui::Begin( XorStr( CHEAT_NAME ) , 0 ) )
 	{
+		if ( ImGui::CollapsingHeader( XorStr( "Aimbot" ) ) )
+		{
+			RenderCheckBox( XorStr( "Active" ) , XorStr( "##Aimbot.Active" ) , Settings::Aimbot::Active );
+
+			if ( Settings::Aimbot::Active )
+			{
+				ImGui::Indent();
+
+				RenderCheckBox( XorStr( "  Only Enemy" ) , XorStr( "##Aimbot.OnlyEnemy" ) , Settings::Aimbot::OnlyEnemy );
+				RenderCheckBox( XorStr( "  Only Visible" ) , XorStr( "##Aimbot.OnlyVisible" ) , Settings::Aimbot::OnlyVisible );
+
+				const char* BoneItems[] = { "Head" , "Neck" , "Upper Body" };
+				RenderComboBox( XorStr( "  Aim Bone" ) , XorStr( "##Aimbot.BoneIndex" ) , Settings::Aimbot::BoneIndex , BoneItems , IM_ARRAYSIZE( BoneItems ) );
+
+				RenderSliderFloat( XorStr( "  FOV" ) , XorStr( "##Aimbot.FOV" ) , Settings::Aimbot::FOV , 1.f , 45.f );
+				RenderSliderFloat( XorStr( "  Smoothing" ) , XorStr( "##Aimbot.Smoothing" ) , Settings::Aimbot::Smoothing , 1.f , 20.f );
+
+				ImGui::Spacing();
+				RenderCheckBox( XorStr( "  TriggerBot" ) , XorStr( "##Aimbot.TriggerBot" ) , Settings::Aimbot::TriggerBot );
+
+				if ( Settings::Aimbot::TriggerBot )
+				{
+					ImGui::Indent();
+					RenderSliderFloat( XorStr( "    Trigger FOV" ) , XorStr( "##Aimbot.TriggerFOV" ) , Settings::Aimbot::TriggerFOV , 0.5f , 10.f );
+					ImGui::Unindent();
+				}
+
+				ImGui::Spacing();
+				ImGui::TextDisabled( XorStr( "  Hold key: Left Alt" ) );
+
+				ImGui::Unindent();
+			}
+		}
+
 		if ( ImGui::CollapsingHeader( XorStr( "Visuals" ) ) )
 		{
 			RenderCheckBox( XorStr( "Active" ) , XorStr( "##Visual.Active" ) , Settings::Visual::Active );
@@ -151,6 +185,23 @@ auto CAndromedaMenu::RenderSliderInt( const char* szTitle , const char* szStrID 
 
 	ImGui::PushItemWidth( -1.f );
 	const auto Ret = ImGui::SliderInt( szStrID , &Value , Min , Max );
+	ImGui::PopItemWidth();
+
+	return Ret;
+}
+
+auto CAndromedaMenu::RenderSliderFloat( const char* szTitle , const char* szStrID , float& Value , float Min , float Max ) -> bool
+{
+	if ( szTitle )
+	{
+		ImGui::AlignTextToFramePadding();
+		ImGui::Text( szTitle );
+	}
+
+	ImGui::SameLine();
+
+	ImGui::PushItemWidth( -1.f );
+	const auto Ret = ImGui::SliderFloat( szStrID , &Value , Min , Max , "%.1f" );
 	ImGui::PopItemWidth();
 
 	return Ret;

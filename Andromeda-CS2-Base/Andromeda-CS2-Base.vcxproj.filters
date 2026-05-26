@@ -477,6 +477,9 @@
     <ClCompile Include="Andromeda-CS2-Base\CS2\Hook\Hook_EquipItemInLoadout.cpp">
       <Filter>Andromeda-CS2-Base\CS2\Hook</Filter>
     </ClCompile>
+    <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CAimbot\CAimbot.cpp">
+      <Filter>Andromeda-CS2-Base\AndromedaClient\Features\CAimbot</Filter>
+    </ClCompile>
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CVisual\CVisual.cpp">
       <Filter>Andromeda-CS2-Base\AndromedaClient\Features\CVisual</Filter>
     </ClCompile>

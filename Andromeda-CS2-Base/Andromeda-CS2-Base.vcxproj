@@ -140,6 +140,7 @@
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\CAndromedaGUI.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CInventoryChanger\CInventoryChanger.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CInventoryChanger\CInventoryItemsManager.cpp" />
+    <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CAimbot\CAimbot.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Features\CVisual\CVisual.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Fonts\CFont.cpp" />
     <ClCompile Include="Andromeda-CS2-Base\AndromedaClient\Fonts\CFontManager.cpp" />

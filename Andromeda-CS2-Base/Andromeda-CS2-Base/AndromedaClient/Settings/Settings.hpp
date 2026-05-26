@@ -5,6 +5,35 @@
 
 namespace Settings
 {
+	// -------------------------------------------------------
+	// Aimbot
+	// -------------------------------------------------------
+	namespace Aimbot
+	{
+		inline auto Active      = false;
+		inline auto OnlyEnemy   = true;
+		inline auto OnlyVisible = true;
+
+		// Hold key for smooth aim — default Left Alt (VK_LMENU = 0xA4)
+		inline auto HoldKey     = 0xA4;
+
+		// FOV cone (degrees) — targets outside this angle are ignored
+		inline auto FOV         = 10.f;
+
+		// Smoothing factor — 1.0 = instant snap, higher = softer
+		inline auto Smoothing   = 5.f;
+
+		// 0 = Head (head_0), 1 = Neck (neck_0), 2 = Body (spine_1)
+		inline auto BoneIndex   = 0;
+
+		// TriggerBot — auto-fires when crosshair overlaps target within TriggerFOV
+		inline auto TriggerBot  = false;
+		inline auto TriggerFOV  = 2.f;
+	}
+
+	// -------------------------------------------------------
+	// Visuals
+	// -------------------------------------------------------
 	namespace Visual
 	{
 		inline auto Active = true;
